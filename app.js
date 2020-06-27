@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', indexRouter);  //localhost:3000
-app.use('/api/users', usersRouter); //localhost:3000/users
-app.use('/api/blog', blogRouter); //localhost:3000/blog
+app.use('/api', indexRouter);  //localhost:3000/api
+app.use('/api/users', usersRouter); //localhost:3000/api/users
+app.use('/api/blog', blogRouter); //localhost:3000/api/blog
 
 module.exports = app;
