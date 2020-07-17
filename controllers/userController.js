@@ -25,9 +25,24 @@ exports.index = async (req, res, next) =>{
     //   attributes:['id','name',['email','userName'],'created_date'],
     //   order:[['id','desc']]
     // });
-    const sql = "select id,name,email,created_date from users order by id desc";
-    const users = await models.sequelize.query(sql,{
-      type: models.sequelize.QueryTypes.SELECT
+
+    // const sql = "select id,name,email,created_date from users order by id desc";
+    // const users = await models.sequelize.query(sql,{
+    //   type: models.sequelize.QueryTypes.SELECT
+    // });
+
+    const users = await models.User.findAll({
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: models.Blog,
+          as: 'blogs',
+          attributes:['id','title']
+        }
+      ],
+      order:[['id','desc'],
+      ['blogs','id','desc']
+    ]
     });
 
     res.status(200).json({
